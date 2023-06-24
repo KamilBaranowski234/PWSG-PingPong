@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     public Rigidbody2D RB2D;
-    public float speed = 2;
+    public float speed = 5;
     public Vector2 vel;
     public bool gameStarted;
     public ScoreManager scoreManager;
@@ -27,7 +27,7 @@ public class BallController : MonoBehaviour
 
     }
 
-
+    
     private Vector2 GenerateRandomVector2Without0(bool ShouldReturnNormalized)
     {
         Vector2 newVelocity = new Vector2();
@@ -44,8 +44,21 @@ public class BallController : MonoBehaviour
     {
         RB2D.velocity = Vector2.Reflect(vel, collision.contacts[0].normal);
         vel = RB2D.velocity;
+        
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+
+        if (playerController !=null)
+        {
+            IncrementSpeed();
+        }
     }
 
+    private void IncrementSpeed()
+    {
+        speed = speed * 1.5f;
+        RB2D.velocity = vel.normalized * speed;
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (transform.position.x > 0)
@@ -67,6 +80,7 @@ public class BallController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space) && gameStarted==false)
             SendBallToRandomDirection();
+        speed = 5;
     }
 
 }

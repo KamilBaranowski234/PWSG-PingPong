@@ -31,4 +31,16 @@ public class ScoreManager : MonoBehaviour
         rightScore++;
         rightScoreText.text = rightScore.ToString();
     }
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.T))
+        {
+            leftScore = 0;
+            rightScore = 0;
+
+            leftScoreText.text = leftScore.ToString();
+            rightScoreText.text = rightScore.ToString();
+        }
+            
+    }
 }
