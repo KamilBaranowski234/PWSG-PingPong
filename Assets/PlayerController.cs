@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Start");
     }
 
-    // Update is called once per frame  -7
     void Update()
     {
         
@@ -26,12 +25,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += Vector3.up * Time.deltaTime * speed;
         }
-
         if (Input.GetKey(keyDown) && transform.position.y > -4)
         {
             transform.position += Vector3.down * Time.deltaTime * speed;
         }
-
         if (Input.GetKey(keyRight) && transform.position.x < limitRight)
         {
             transform.position += Vector3.right * Time.deltaTime * speed*5;
