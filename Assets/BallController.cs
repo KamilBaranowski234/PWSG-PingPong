@@ -9,7 +9,7 @@ public class BallController : MonoBehaviour
     public Vector2 vel;
     public bool gameStarted;
     public ScoreManager scoreManager;
-    // Start is called before the first frame update
+
     void Start()
     {
         RB2D = GetComponent<Rigidbody2D>();
@@ -19,12 +19,12 @@ public class BallController : MonoBehaviour
 
     private void SendBallToRandomDirection()
     {
+        speed = 5;
         RB2D.velocity = Vector2.zero;
         transform.position = Vector2.zero;
         RB2D.velocity=GenerateRandomVector2Without0(true)*speed;
         vel = RB2D.velocity;
         gameStarted = true;
-
     }
 
     
@@ -55,9 +55,9 @@ public class BallController : MonoBehaviour
 
     private void IncrementSpeed()
     {
-        speed = speed * 1.5f;
+        speed *= 1.2f;
         RB2D.velocity = vel.normalized * speed;
-
+        vel = RB2D.velocity;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -78,9 +78,8 @@ public class BallController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space) && gameStarted==false)
-            SendBallToRandomDirection();
-        speed = 5;
+        if (Input.GetKeyUp(KeyCode.Space) && gameStarted == false) 
+        {SendBallToRandomDirection();};
     }
 
 }
